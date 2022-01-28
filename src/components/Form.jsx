@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string, bool, func } from 'prop-types';
 
 class Form extends React.Component {
   render() {
@@ -108,8 +108,6 @@ class Form extends React.Component {
     );
   }
 }
-
-const { string, bool, func } = PropTypes;
 
 Form.propTypes = {
   cardName: string.isRequired,
