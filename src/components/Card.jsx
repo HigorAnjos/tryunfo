@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, bool } from 'prop-types';
+import { string, bool, func } from 'prop-types';
 
 class Card extends React.Component {
   render() {
@@ -11,7 +11,26 @@ class Card extends React.Component {
       cardAttr3,
       cardImage,
       cardRare,
-      cardTrunfo } = this.props;
+      cardTrunfo,
+      buttonDelete,
+      deleteCardOnStorage } = this.props;
+
+    let renderDelete;
+    if (buttonDelete) {
+      renderDelete = (
+        <button
+          name={ cardName }
+          type="button"
+          onClick={ deleteCardOnStorage }
+          data-testid="delete-button"
+        >
+          Excluir
+        </button>
+      );
+    } else {
+      renderDelete = '';
+    }
+
     return (
       <div>
         <h1 data-testid="name-card">{ cardName }</h1>
@@ -22,10 +41,15 @@ class Card extends React.Component {
         <p data-testid="attr3-card">{ cardAttr3 }</p>
         <p data-testid="rare-card">{ cardRare }</p>
         { cardTrunfo && <p data-testid="trunfo-card">Super Trunfo</p> }
+        { renderDelete }
       </div>
     );
   }
 }
+
+Card.defaultProps = {
+  buttonDelete: false,
+};
 
 Card.propTypes = {
   cardName: string.isRequired,
@@ -36,6 +60,8 @@ Card.propTypes = {
   cardImage: string.isRequired,
   cardRare: string.isRequired,
   cardTrunfo: bool.isRequired,
+  buttonDelete: bool,
+  deleteCardOnStorage: func,
 };
 
 export default Card;

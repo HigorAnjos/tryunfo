@@ -22,6 +22,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.btnOn = this.btnOn.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.deleteCardOnStorage = this.deleteCardOnStorage.bind(this);
   }
 
   handleChange({ target }) {
@@ -71,6 +72,22 @@ class App extends React.Component {
     }));
   }
 
+  deleteCardOnStorage({ target: { name } }) {
+    let { storage } = this.state;
+    const { cardTrunfo } = storage.find((card) => card.cardName === name);
+    storage = storage.filter((card) => card.cardName !== name);
+    if (cardTrunfo) {
+      this.setState({
+        storage,
+        hasTrunfo: false,
+      });
+    } else {
+      this.setState({
+        storage,
+      });
+    }
+  }
+
   btnOn() {
     const {
       cardName,
@@ -115,7 +132,9 @@ class App extends React.Component {
       storage,
     } = this.state;
 
-    const cardList = storage.map((card, i) => (<Card key={ i } { ...card } />));
+    const cardList = storage
+      .map((card, i) => (<Card key={ i } { ...card } buttonDelete
+        deleteCardOnStorage={ this.deleteCardOnStorage } />));
 
     return (
       <div>
