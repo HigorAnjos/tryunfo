@@ -16,14 +16,12 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
-      hasTrunfo: true,
+      hasTrunfo: false,
       storage: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.btnOn = this.btnOn.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
-    this.clearState = this.clearState.bind(this);
-    this.hasAnyTrunfo = this.hasAnyTrunfo.bind(this);
   }
 
   handleChange({ target }) {
@@ -59,26 +57,18 @@ class App extends React.Component {
     };
 
     this.setState((prevState) => ({
-      storage: [...prevState.storage, newCard],
-    }), this.clearState);
-  }
-
-  hasAnyTrunfo() {
-    return true;
-  }
-
-  clearState() {
-    this.setState({
       cardName: '',
       cardDescription: '',
-      cardAttr1: 0,
-      cardAttr2: 0,
-      cardAttr3: 0,
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
-    });
+      hasTrunfo: cardTrunfo,
+      storage: [...prevState.storage, newCard],
+    }));
   }
 
   btnOn() {
@@ -122,7 +112,10 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       hasTrunfo,
+      storage,
     } = this.state;
+
+    const cardList = storage.map((card, i) => (<Card key={ i } { ...card } />));
 
     return (
       <div>
@@ -152,6 +145,8 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        <h2>Todas as Cartas</h2>
+        { cardList }
       </div>
     );
   }
