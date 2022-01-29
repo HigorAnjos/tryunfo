@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import './App.css';
 
 class App extends React.Component {
   constructor() {
@@ -168,6 +169,7 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          deleteCardOnStorage={ this.deleteCardOnStorage }
         />
         <h2>Todas as Cartas</h2>
         { cardList }
