@@ -13,7 +13,7 @@ class App extends React.Component {
       cardAttr2: '',
       cardAttr3: '',
       cardImage: '',
-      cardRare: '',
+      cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
     };
@@ -26,23 +26,35 @@ class App extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
-    });
-    this.btnOn();
+    }, this.btnOn);
   }
 
   btnOn() {
-    // Se estiver todo preenchido -> entao isSaveButtonDisabled false
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+    } = this.state;
+
     const MAXSUMPOWERCARD = 210;
     const MAXPOWERCARD = 90;
     const MINPOWERCARD = 0;
 
-    if (cardName && cardDescription && cardImage && cardRare
-      && (cardAttr1 + cardAttr2 + cardAttr3) <= MAXSUMPOWERCARD
-      && cardAttr1 <= MAXPOWERCARD && cardAttr1 >= MINPOWERCARD
-      && cardAttr2 <= MAXPOWERCARD && cardAttr2 >= MINPOWERCARD
-      && cardAttr3 <= MAXPOWERCARD && cardAttr3 >= MINPOWERCARD) {
+    if (!!cardName && !!cardDescription && !!cardImage && !!cardRare
+      && (Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3)) <= MAXSUMPOWERCARD
+      && Number(cardAttr1) <= MAXPOWERCARD && Number(cardAttr1) >= MINPOWERCARD
+      && Number(cardAttr2) <= MAXPOWERCARD && Number(cardAttr2) >= MINPOWERCARD
+      && Number(cardAttr3) <= MAXPOWERCARD && Number(cardAttr3) >= MINPOWERCARD) {
       this.setState({
         isSaveButtonDisabled: false,
+      });
+    } else {
+      this.setState({
+        isSaveButtonDisabled: true,
       });
     }
   }
