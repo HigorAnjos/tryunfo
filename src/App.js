@@ -11,18 +11,58 @@ class App extends React.Component {
       cardDescription: '',
       cardAttr1: '',
       cardAttr2: '',
+      cardAttr3: '',
+      cardImage: '',
+      cardRare: '',
+      cardTrunfo: false,
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange({ target }) {
+    console.log(target)
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  render() {
+    const { cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
       cardAttr3,
       cardImage,
       cardRare,
-      cardTrunfo
-    }
-  }
-  render() {
+      cardTrunfo } = this.state;
+
     return (
       <div>
         <h1>Tryunfo</h1>
-        <Form />
-        <Card />
+        <Form
+          onInputChange={ this.handleChange }
+          cardName={ cardName }
+          cardDescription={ cardDescription }
+          cardAttr1={ cardAttr1 }
+          cardAttr2={ cardAttr2 }
+          cardAttr3={ cardAttr3 }
+          cardImage={ cardImage }
+          cardRare={ cardRare }
+          cardTrunfo={ cardTrunfo }
+        />
+        <Card
+          onInputChange={ this.handleChange }
+          cardName={ cardName }
+          cardDescription={ cardDescription }
+          cardAttr1={ cardAttr1 }
+          cardAttr2={ cardAttr2 }
+          cardAttr3={ cardAttr3 }
+          cardImage={ cardImage }
+          cardRare={ cardRare }
+          cardTrunfo={ cardTrunfo }
+        />
       </div>
     );
   }
