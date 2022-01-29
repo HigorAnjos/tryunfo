@@ -15,17 +15,24 @@ class App extends React.Component {
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
+      isSaveButtonDisabled: true,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.btnOn = this.btnOn.bind(this);
   }
 
   handleChange({ target }) {
-    console.log(target)
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
     });
+    this.btnOn();
+  }
+
+  btnOn() {
+    // Se estiver todo preenchido -> entao isSaveButtonDisabled
+    return 0;
   }
 
   render() {
@@ -36,13 +43,16 @@ class App extends React.Component {
       cardAttr3,
       cardImage,
       cardRare,
-      cardTrunfo } = this.state;
+      cardTrunfo,
+      isSaveButtonDisabled,
+    } = this.state;
 
     return (
       <div>
         <h1>Tryunfo</h1>
         <Form
           onInputChange={ this.handleChange }
+          isSaveButtonDisabled={ isSaveButtonDisabled }
           cardName={ cardName }
           cardDescription={ cardDescription }
           cardAttr1={ cardAttr1 }
