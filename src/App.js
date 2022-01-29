@@ -16,12 +16,14 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
+      hasTrunfo: true,
       storage: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.btnOn = this.btnOn.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.clearState = this.clearState.bind(this);
+    this.hasAnyTrunfo = this.hasAnyTrunfo.bind(this);
   }
 
   handleChange({ target }) {
@@ -59,6 +61,10 @@ class App extends React.Component {
     this.setState((prevState) => ({
       storage: [...prevState.storage, newCard],
     }), this.clearState);
+  }
+
+  hasAnyTrunfo() {
+    return true;
   }
 
   clearState() {
@@ -115,6 +121,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       isSaveButtonDisabled,
+      hasTrunfo,
     } = this.state;
 
     return (
@@ -124,6 +131,7 @@ class App extends React.Component {
           onInputChange={ this.handleChange }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onSaveButtonClick={ this.onSaveButtonClick }
+          hasTrunfo={ hasTrunfo }
           cardName={ cardName }
           cardDescription={ cardDescription }
           cardAttr1={ cardAttr1 }
