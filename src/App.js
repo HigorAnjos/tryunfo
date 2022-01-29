@@ -31,8 +31,20 @@ class App extends React.Component {
   }
 
   btnOn() {
-    // Se estiver todo preenchido -> entao isSaveButtonDisabled
-    return 0;
+    // Se estiver todo preenchido -> entao isSaveButtonDisabled false
+    const MAXSUMPOWERCARD = 210;
+    const MAXPOWERCARD = 90;
+    const MINPOWERCARD = 0;
+
+    if (cardName && cardDescription && cardImage && cardRare
+      && (cardAttr1 + cardAttr2 + cardAttr3) <= MAXSUMPOWERCARD
+      && cardAttr1 <= MAXPOWERCARD && cardAttr1 >= MINPOWERCARD
+      && cardAttr2 <= MAXPOWERCARD && cardAttr2 >= MINPOWERCARD
+      && cardAttr3 <= MAXPOWERCARD && cardAttr3 >= MINPOWERCARD) {
+      this.setState({
+        isSaveButtonDisabled: false,
+      });
+    }
   }
 
   render() {
