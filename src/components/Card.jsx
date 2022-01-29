@@ -61,7 +61,7 @@ Card.propTypes = {
   cardRare: string.isRequired,
   cardTrunfo: bool.isRequired,
   buttonDelete: bool,
-  deleteCardOnStorage: func,
+  deleteCardOnStorage: func.isRequired,
 };
 
 export default Card;

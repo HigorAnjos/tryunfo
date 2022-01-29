@@ -133,8 +133,13 @@ class App extends React.Component {
     } = this.state;
 
     const cardList = storage
-      .map((card, i) => (<Card key={ i } { ...card } buttonDelete
-        deleteCardOnStorage={ this.deleteCardOnStorage } />));
+      .map((card, i) => (
+        <Card
+          key={ i }
+          { ...card }
+          buttonDelete
+          deleteCardOnStorage={ this.deleteCardOnStorage }
+        />));
 
     return (
       <div>
