@@ -37,8 +37,10 @@ class Card extends React.Component {
         <div id="title">
           <h1>Pré-Visualização</h1>
         </div>
-        <div id="box-1">
-          as
+        <div id="box-white">
+          <div id="box-green">
+            a
+          </div>
         </div>
         <h1 data-testid="name-card">{ cardName }</h1>
         <img src={ cardImage } alt={ cardName } data-testid="image-card" />
