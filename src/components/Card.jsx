@@ -34,6 +34,12 @@ class Card extends React.Component {
 
     return (
       <div id="card-container">
+        <div id="title">
+          <h1>Pré-Visualização</h1>
+        </div>
+        <div id="box-1">
+          as
+        </div>
         <h1 data-testid="name-card">{ cardName }</h1>
         <img src={ cardImage } alt={ cardName } data-testid="image-card" />
         <p data-testid="description-card">{ cardDescription }</p>
