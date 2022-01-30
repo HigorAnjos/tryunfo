@@ -40,7 +40,9 @@ class Form extends React.Component {
 
     return (
       <div id="form-container">
-        <h1>Adicionar nova carta</h1>
+        <div id="title">
+          <h1>Adicionar nova carta</h1>
+        </div>
         <form>
           <label htmlFor="card-name">
             Nome
@@ -64,6 +66,8 @@ class Form extends React.Component {
               data-testid="description-input"
               id="card-desc"
               type="text"
+              rows="4"
+              cols="50"
             />
           </label>
           <label htmlFor="card-attr1">

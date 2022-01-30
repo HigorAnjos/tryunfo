@@ -5,9 +5,28 @@
 }
 
 #form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   width: 50%;
-  background-color: whitesmoke;
+  background-color: #FAFAFA;
   padding: 30px 20px;
+  align-items: center;
+}
+
+
+#form-container #title {
+  padding-right: 45%;
+}
+
+#form-container input, #form-container textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: #FAFAFA;
+  border: none;
+  border-bottom: 2px solid rgba(51, 51, 51, 0.7);
 }
 
 #card-container {
