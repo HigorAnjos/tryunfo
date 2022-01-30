@@ -1,9 +1,6 @@
-#form-container {
-  width: 50%;
-}
-
-#form-container form {
+form {
   display: flex;
   flex-direction: column;
-  background-color: brown;
+  flex-wrap: wrap;
+  width: 70%;
 }

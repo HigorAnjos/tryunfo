@@ -143,36 +143,40 @@ class App extends React.Component {
         />));
 
     return (
-      <div>
-        <Form
-          onInputChange={ this.handleChange }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onSaveButtonClick={ this.onSaveButtonClick }
-          hasTrunfo={ hasTrunfo }
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-        <Card
-          onInputChange={ this.handleChange }
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          deleteCardOnStorage={ this.deleteCardOnStorage }
-        />
-        <h2>Todas as Cartas</h2>
-        { cardList }
-      </div>
+      <section>
+        <div id="new-card">
+          <Form
+            onInputChange={ this.handleChange }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+            onSaveButtonClick={ this.onSaveButtonClick }
+            hasTrunfo={ hasTrunfo }
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+          />
+          <Card
+            onInputChange={ this.handleChange }
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            deleteCardOnStorage={ this.deleteCardOnStorage }
+          />
+        </div>
+        <div>
+          <h2>Todas as Cartas</h2>
+          { cardList }
+        </div>
+      </section>
     );
   }
 }

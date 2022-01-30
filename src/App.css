@@ -1,4 +1,17 @@
-body {
+#new-card {
+  display: flex;
+  background-color: cadetblue;
+  height: 100vh;
+}
+
+#form-container {
+  width: 50%;
   background-color: whitesmoke;
-  font-family: 'Epilogue', sans-serif;
+  padding: 30px 20px;
+}
+
+#card-container {
+  width: 50%;
+  background-color: #023031;
+  color: white;
 }

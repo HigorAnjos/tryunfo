@@ -33,16 +33,18 @@ class Form extends React.Component {
             data-testid="trunfo-input"
             id="trunfo"
           />
+          <strong>Super Trybe Trunfo</strong>
         </label>
       );
     }
 
     return (
       <div id="form-container">
+        <h1>Adicionar nova carta</h1>
         <form>
-          <h1>Adicionar nova carta</h1>
           <label htmlFor="card-name">
-            nome da carta:
+            Nome
+            <br />
             <input
               name="cardName"
               value={ cardName }
@@ -53,7 +55,8 @@ class Form extends React.Component {
             />
           </label>
           <label htmlFor="card-desc">
-            descrição da carta:
+            Descrição
+            <br />
             <textarea
               name="cardDescription"
               onChange={ onInputChange }
@@ -64,7 +67,8 @@ class Form extends React.Component {
             />
           </label>
           <label htmlFor="card-attr1">
-            atributo 1 da carta:
+            Attr01
+            <br />
             <input
               name="cardAttr1"
               value={ cardAttr1 }
@@ -75,7 +79,7 @@ class Form extends React.Component {
             />
           </label>
           <label htmlFor="card-attr2">
-            atributo 2 da carta:
+            Attr02
             <input
               name="cardAttr2"
               value={ cardAttr2 }
@@ -86,7 +90,7 @@ class Form extends React.Component {
             />
           </label>
           <label htmlFor="card-attr3">
-            atributo 3 da carta:
+            Attr03
             <input
               name="cardAttr3"
               value={ cardAttr3 }
@@ -97,7 +101,7 @@ class Form extends React.Component {
             />
           </label>
           <label htmlFor="card-img">
-            Image url:
+            Imagem
             <input
               name="cardImage"
               value={ cardImage }
@@ -113,6 +117,8 @@ class Form extends React.Component {
             onChange={ onInputChange }
             data-testid="rare-input"
           >
+            Raridade
+            <br />
             <option>normal</option>
             <option>raro</option>
             <option>muito raro</option>
