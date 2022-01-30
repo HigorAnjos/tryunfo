@@ -1,0 +1,9 @@
+#form-container {
+  width: 50%;
+}
+
+#form-container form {
+  display: flex;
+  flex-direction: column;
+  background-color: brown;
+}
