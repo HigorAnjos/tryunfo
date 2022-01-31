@@ -85,15 +85,8 @@ class App extends React.Component {
     const { storage, filterName } = this.state;
     console.log(filterName);
     const cardList = storage
-      .filter((card) => card.cardName.includes(value))
-      .map((card, i) => (
-        <Card
-          key={ i }
-          { ...card }
-          buttonDelete
-          deleteCardOnStorage={ this.deleteCardOnStorage }
-        />));
-    return cardList;
+      .filter((card) => card.cardName.includes(value));
+    return this.makeDeck(cardList);
   }
 
   filterCardSelected = (value) => {
@@ -103,7 +96,7 @@ class App extends React.Component {
     return this.makeDeck(cardList);
   }
 
-  filterCardSuperTrunfo = (event) => {
+  filterCardSuperTrunfo = () => {
     const { storage, filterSelect } = this.state;
     const cardList = storage
       .filter((card) => card.cardRare === filterSelect);
@@ -117,7 +110,7 @@ class App extends React.Component {
     return this.makeDeck(cardList);
   }
 
-  makeDeck = (arr) => {
+  makeDeck = (arr) => (
     arr
       .map((card, i) => (
         <Card
@@ -126,8 +119,8 @@ class App extends React.Component {
           buttonDelete
           deleteCardOnStorage={ this.deleteCardOnStorage }
         />
-      ));
-  }
+      ))
+  )
 
   handleFilter = ({ target: { name, value } }) => {
     if (name === 'filterName') {
@@ -159,7 +152,6 @@ class App extends React.Component {
       });
     }
   }
-
 
   btnOn() {
     const {
@@ -210,9 +202,6 @@ class App extends React.Component {
         <Filter
           { ...this.state }
           handleChange={ this.handleChange }
-          filterCards={ this.filterCards }
-          filterCardSelected={ this.filterCardSelected }
-          filterCardSuperTrunfo={ this.filterCardSuperTrunfo }
           handleFilter={ this.handleFilter }
         />
       </section>
