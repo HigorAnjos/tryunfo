@@ -33,8 +33,8 @@ class App extends React.Component {
   }
 
   handleChange(event) {
-    const { name } = event.target;
-    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    const { name, type, checked, value2 } = event.target;
+    const value = type === 'checkbox' ? checked : value2;
     const filter = this.handleFilter(event);
     this.setState({
       [name]: value,
@@ -124,6 +124,20 @@ class App extends React.Component {
     return cardList;
   }
 
+  filterCardSuperTrunfoCheked = () => {
+    const { storage } = this.state;
+    const cardList = storage
+      .filter((card) => card.cardTrunfo)
+      .map((card, i) => (
+        <Card
+          key={ i }
+          { ...card }
+          buttonDelete
+          deleteCardOnStorage={ this.deleteCardOnStorage }
+        />));
+    return cardList;
+  }
+
   handleFilter = ({ target: { name, value }}) => {
     console.log(name, value);
     let aux;
@@ -132,8 +146,16 @@ class App extends React.Component {
       return aux;
     }
     if (name === 'filterSelect') {
+      if (value === 'todas') {
+        aux = this.filterCards('');
+        return aux;
+      }
       aux = this.filterCardSelected(value);
       //console.log('AUXSelect', aux);
+      return aux;
+    }
+    if (name === 'filterChecked') {
+      aux = this.filterCardSuperTrunfoCheked();
       return aux;
     }
   }

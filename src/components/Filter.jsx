@@ -46,7 +46,8 @@ class Filter extends React.Component {
         </label>
         <label htmlFor="filterSuper">
           <input
-            name="superTrunfo"
+            data-testid="trunfo-filter"
+            name="filterChecked"
             checked={ filterChecked }
             onChange={ (event) => { handleChange(event); handleFilter(event); } }
             id="filterSuper"
