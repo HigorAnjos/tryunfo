@@ -14,7 +14,8 @@ class Card extends React.Component {
       cardRare,
       cardTrunfo,
       buttonDelete,
-      deleteCardOnStorage } = this.props;
+      deleteCardOnStorage,
+      visualizacao } = this.props;
 
     let renderDelete;
     if (buttonDelete) {
@@ -32,22 +33,52 @@ class Card extends React.Component {
       renderDelete = '';
     }
 
-    return (
-      <div id="card-container">
+    let titleVisualizacao;
+    if (visualizacao) {
+      titleVisualizacao = (
         <div id="title">
           <h1>Pré-Visualização</h1>
         </div>
+      )
+    } else {
+      titleVisualizacao = '';
+    }
+
+    return (
+      <div id="card-container">
+        {titleVisualizacao}
         <div id="box-white">
           <div id="box-green">
-            <h1 data-testid="name-card">{ cardName }</h1>
-            <img src={ cardImage } alt={ cardName } data-testid="image-card" />
-            <p data-testid="description-card">{ cardDescription }</p>
-            <p data-testid="attr1-card">{ cardAttr1 }</p>
-            <p data-testid="attr2-card">{ cardAttr2 }</p>
-            <p data-testid="attr3-card">{ cardAttr3 }</p>
-            <p data-testid="rare-card">{ cardRare }</p>
-            { cardTrunfo && <p data-testid="trunfo-card">Super Trunfo</p> }
-            { renderDelete }
+            <div className="bg-title">
+              <h1 data-testid="name-card">{ cardName }</h1>
+            </div>
+            <div className="image">
+              <img src={ cardImage } alt={ cardName } data-testid="image-card" />
+            </div>
+            <div className="description">
+              <p data-testid="description-card">{ cardDescription }</p>
+            </div>
+            <div className="box-attr">
+              <p data-testid="attr1-card">
+                Attr01....................................
+                { cardAttr1 }
+              </p>
+              <p data-testid="attr2-card">
+                Attr02....................................
+                { cardAttr2 }
+              </p>
+              <p data-testid="attr3-card">
+                Attr03....................................
+                { cardAttr3 }
+              </p>
+              <p data-testid="rare-card">{ cardRare }</p>
+            </div>
+            <div className="super-trunfo">
+              { cardTrunfo && <p data-testid="trunfo-card">Super Trunfo</p> }
+            </div>
+            <div className="btn-delete">
+              { renderDelete }
+            </div>
           </div>
         </div>
       </div>

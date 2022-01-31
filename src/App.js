@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 import './App.css';
+import data from './components/data';
 
 class App extends React.Component {
   constructor() {
@@ -13,12 +14,12 @@ class App extends React.Component {
       cardAttr1: '',
       cardAttr2: '',
       cardAttr3: '',
-      cardImage: '',
+      cardImage: 'https://i.pinimg.com/originals/11/e1/3a/11e13a0599b90f363893de000b7179d1.png',
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       hasTrunfo: false,
-      storage: [],
+      storage: [...data],
     };
     this.handleChange = this.handleChange.bind(this);
     this.btnOn = this.btnOn.bind(this);
@@ -169,11 +170,12 @@ class App extends React.Component {
             cardImage={ cardImage }
             cardRare={ cardRare }
             cardTrunfo={ cardTrunfo }
+            visualizacao
             deleteCardOnStorage={ this.deleteCardOnStorage }
           />
         </div>
-        <div>
-          <h2>Todas as Cartas</h2>
+        <h2>Todas as Cartas</h2>
+        <div className="grid-card">
           { cardList }
         </div>
       </section>
