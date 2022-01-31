@@ -19,7 +19,8 @@ class App extends React.Component {
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       hasTrunfo: false,
-      storage: [],
+      filterName: '',
+      storage: [...data],
     };
     this.handleChange = this.handleChange.bind(this);
     this.btnOn = this.btnOn.bind(this);
@@ -74,6 +75,22 @@ class App extends React.Component {
     }));
   }
 
+  filterCards = () => {
+    const { storage, filterName } = this.state;
+    console.log(storage);
+    console.log(filterName);
+    const cardList = storage
+      .filter((card) => card.cardName === filterName)
+      .map((card, i) => (
+        <Card
+          key={ i }
+          { ...card }
+          buttonDelete
+          deleteCardOnStorage={ this.deleteCardOnStorage }
+        />));
+    return cardList;
+  }
+
   deleteCardOnStorage({ target: { name } }) {
     let { storage } = this.state;
     const { cardTrunfo } = storage.find((card) => card.cardName === name);
@@ -89,6 +106,7 @@ class App extends React.Component {
       });
     }
   }
+
 
   btnOn() {
     const {
@@ -134,15 +152,6 @@ class App extends React.Component {
       storage,
     } = this.state;
 
-    const cardList = storage
-      .map((card, i) => (
-        <Card
-          key={ i }
-          { ...card }
-          buttonDelete
-          deleteCardOnStorage={ this.deleteCardOnStorage }
-        />));
-
     return (
       <section>
         <div id="new-card">
@@ -177,9 +186,21 @@ class App extends React.Component {
         <div className="filter">
           <h2>Todas as Cartas</h2>
           <h3>Filtro de buscar</h3>
+          <label htmlFor="filter-name">
+            Nome
+            <br />
+            <input
+              name="filterName"
+              value={ this.state.filterName }
+              onChange={ this.handleChange }
+              data-testid="name-filter"
+              type="text"
+              id="filter-name"
+            />
+          </label>
         </div>
         <div className="grid-card">
-          { cardList }
+          { this.filterCards() }
         </div>
       </section>
     );
