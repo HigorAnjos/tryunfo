@@ -32,11 +32,13 @@ class App extends React.Component {
     this.deleteCardOnStorage = this.deleteCardOnStorage.bind(this);
   }
 
-  handleChange({ target }) {
-    const { name } = target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+  handleChange(event) {
+    const { name } = event.target;
+    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    const filter = this.handleFilter(event);
     this.setState({
       [name]: value,
+      storageFilter: filter,
     }, this.btnOn);
   }
 
@@ -79,10 +81,11 @@ class App extends React.Component {
     }));
   }
 
-  filterCards = () => {
+  filterCards = (value) => {
     const { storage, filterName } = this.state;
+    console.log(filterName);
     const cardList = storage
-      .filter((card) => card.cardName === filterName)
+      .filter((card) => card.cardName.includes(value))
       .map((card, i) => (
         <Card
           key={ i }
@@ -93,10 +96,10 @@ class App extends React.Component {
     return cardList;
   }
 
-  filterCardSelected = () => {
-    const { storage, filterSelect } = this.state;
+  filterCardSelected = (value) => {
+    const { storage } = this.state;
     const cardList = storage
-      .filter((card) => card.cardRare === filterSelect)
+      .filter((card) => card.cardRare === value)
       .map((card, i) => (
         <Card
           key={ i }
@@ -121,23 +124,17 @@ class App extends React.Component {
     return cardList;
   }
 
-  handleFilter = ({target: { name, value }}) => {
-    //console.log(name, value);
+  handleFilter = ({ target: { name, value }}) => {
+    console.log(name, value);
     let aux;
     if (name === 'filterName') {
-      aux = this.filterCards();
-      if (aux.length > 0) {
-        this.setState({
-          storageFilter: [...aux],
-        });
-      }
+      aux = this.filterCards(value);
+      return aux;
     }
     if (name === 'filterSelect') {
-      aux = this.filterCardSelected();
-      console.log('AUXSelect', aux);
-      this.setState({
-        storageFilter: [...aux],
-      });
+      aux = this.filterCardSelected(value);
+      //console.log('AUXSelect', aux);
+      return aux;
     }
   }
 
