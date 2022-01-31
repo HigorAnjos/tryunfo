@@ -26,7 +26,6 @@ class Form extends React.Component {
         <label htmlFor="trunfo">
           <input
             name="cardTrunfo"
-            // value={ cardTrunfo }
             checked={ cardTrunfo }
             onChange={ onInputChange }
             type="checkbox"

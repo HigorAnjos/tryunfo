@@ -1,8 +1,9 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
-import './App.css';
+import Filter from './components/Filter';
 import data from './components/data';
+import './App.css';
 
 class App extends React.Component {
   constructor() {
@@ -20,7 +21,10 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       hasTrunfo: false,
       filterName: '',
+      filterSelect: '',
+      filterChecked: false,
       storage: [...data],
+      storageFilter: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.btnOn = this.btnOn.bind(this);
@@ -77,8 +81,6 @@ class App extends React.Component {
 
   filterCards = () => {
     const { storage, filterName } = this.state;
-    console.log(storage);
-    console.log(filterName);
     const cardList = storage
       .filter((card) => card.cardName === filterName)
       .map((card, i) => (
@@ -89,6 +91,54 @@ class App extends React.Component {
           deleteCardOnStorage={ this.deleteCardOnStorage }
         />));
     return cardList;
+  }
+
+  filterCardSelected = () => {
+    const { storage, filterSelect } = this.state;
+    const cardList = storage
+      .filter((card) => card.cardRare === filterSelect)
+      .map((card, i) => (
+        <Card
+          key={ i }
+          { ...card }
+          buttonDelete
+          deleteCardOnStorage={ this.deleteCardOnStorage }
+        />));
+    return cardList;
+  }
+
+  filterCardSuperTrunfo = (event) => {
+    const { storage, filterSelect } = this.state;
+    const cardList = storage
+      .filter((card) => card.cardRare === filterSelect)
+      .map((card, i) => (
+        <Card
+          key={ i }
+          { ...card }
+          buttonDelete
+          deleteCardOnStorage={ this.deleteCardOnStorage }
+        />));
+    return cardList;
+  }
+
+  handleFilter = ({target: { name, value }}) => {
+    //console.log(name, value);
+    let aux;
+    if (name === 'filterName') {
+      aux = this.filterCards();
+      if (aux.length > 0) {
+        this.setState({
+          storageFilter: [...aux],
+        });
+      }
+    }
+    if (name === 'filterSelect') {
+      aux = this.filterCardSelected();
+      console.log('AUXSelect', aux);
+      this.setState({
+        storageFilter: [...aux],
+      });
+    }
   }
 
   deleteCardOnStorage({ target: { name } }) {
@@ -149,7 +199,10 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       hasTrunfo,
-      storage,
+      filterName,
+      filterSelect,
+      storageFilter,
+      filterChecked,
     } = this.state;
 
     return (
@@ -183,25 +236,18 @@ class App extends React.Component {
             deleteCardOnStorage={ this.deleteCardOnStorage }
           />
         </div>
-        <div className="filter">
-          <h2>Todas as Cartas</h2>
-          <h3>Filtro de buscar</h3>
-          <label htmlFor="filter-name">
-            Nome
-            <br />
-            <input
-              name="filterName"
-              value={ this.state.filterName }
-              onChange={ this.handleChange }
-              data-testid="name-filter"
-              type="text"
-              id="filter-name"
-            />
-          </label>
-        </div>
-        <div className="grid-card">
-          { this.filterCards() }
-        </div>
+        <Filter
+          filterName={ filterName }
+          cardTrunfo={ cardTrunfo }
+          filterSelect={ filterSelect }
+          handleChange={ this.handleChange }
+          filterCards={ this.filterCards }
+          filterCardSelected={ this.filterCardSelected }
+          filterCardSuperTrunfo={ this.filterCardSuperTrunfo }
+          handleFilter={ this.handleFilter }
+          storageFilter={ storageFilter }
+          filterChecked={ filterChecked }
+        />
       </section>
     );
   }
