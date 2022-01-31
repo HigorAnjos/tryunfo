@@ -14,12 +14,12 @@ class App extends React.Component {
       cardAttr1: '',
       cardAttr2: '',
       cardAttr3: '',
-      cardImage: 'https://i.pinimg.com/originals/11/e1/3a/11e13a0599b90f363893de000b7179d1.png',
+      cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       hasTrunfo: false,
-      storage: [...data],
+      storage: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.btnOn = this.btnOn.bind(this);
@@ -174,7 +174,10 @@ class App extends React.Component {
             deleteCardOnStorage={ this.deleteCardOnStorage }
           />
         </div>
-        <h2>Todas as Cartas</h2>
+        <div className="filter">
+          <h2>Todas as Cartas</h2>
+          <h3>Filtro de buscar</h3>
+        </div>
         <div className="grid-card">
           { cardList }
         </div>

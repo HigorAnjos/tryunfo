@@ -155,3 +155,7 @@
   background-color: hsl(185, 41%, 84%);
   font-weight: bold;
 }
+
+.filter {
+  margin: 10px;
+}
