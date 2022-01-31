@@ -33,11 +33,11 @@ class App extends React.Component {
   }
 
   handleChange(event) {
-    const { name, type, checked, value2 } = event.target;
-    const value = type === 'checkbox' ? checked : value2;
+    const { name, type, checked, value } = event.target;
+    const result = type === 'checkbox' ? checked : value;
     const filter = this.handleFilter(event);
     this.setState({
-      [name]: value,
+      [name]: result,
       storageFilter: filter,
     }, this.btnOn);
   }
@@ -99,64 +99,48 @@ class App extends React.Component {
   filterCardSelected = (value) => {
     const { storage } = this.state;
     const cardList = storage
-      .filter((card) => card.cardRare === value)
-      .map((card, i) => (
-        <Card
-          key={ i }
-          { ...card }
-          buttonDelete
-          deleteCardOnStorage={ this.deleteCardOnStorage }
-        />));
-    return cardList;
+      .filter((card) => card.cardRare === value);
+    return this.makeDeck(cardList);
   }
 
   filterCardSuperTrunfo = (event) => {
     const { storage, filterSelect } = this.state;
     const cardList = storage
-      .filter((card) => card.cardRare === filterSelect)
-      .map((card, i) => (
-        <Card
-          key={ i }
-          { ...card }
-          buttonDelete
-          deleteCardOnStorage={ this.deleteCardOnStorage }
-        />));
-    return cardList;
+      .filter((card) => card.cardRare === filterSelect);
+    return this.makeDeck(cardList);
   }
 
   filterCardSuperTrunfoCheked = () => {
     const { storage } = this.state;
     const cardList = storage
-      .filter((card) => card.cardTrunfo)
+      .filter((card) => card.cardTrunfo);
+    return this.makeDeck(cardList);
+  }
+
+  makeDeck = (arr) => {
+    arr
       .map((card, i) => (
         <Card
           key={ i }
           { ...card }
           buttonDelete
           deleteCardOnStorage={ this.deleteCardOnStorage }
-        />));
-    return cardList;
+        />
+      ));
   }
 
-  handleFilter = ({ target: { name, value }}) => {
-    console.log(name, value);
-    let aux;
+  handleFilter = ({ target: { name, value } }) => {
     if (name === 'filterName') {
-      aux = this.filterCards(value);
-      return aux;
+      return this.filterCards(value);
     }
     if (name === 'filterSelect') {
       if (value === 'todas') {
-        aux = this.filterCards('');
-        return aux;
+        return this.filterCards('');
       }
-      aux = this.filterCardSelected(value);
-      //console.log('AUXSelect', aux);
-      return aux;
+      return this.filterCardSelected(value);
     }
     if (name === 'filterChecked') {
-      aux = this.filterCardSuperTrunfoCheked();
-      return aux;
+      return this.filterCardSuperTrunfoCheked();
     }
   }
 
@@ -208,64 +192,28 @@ class App extends React.Component {
   }
 
   render() {
-    const { cardName,
-      cardDescription,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-      cardImage,
-      cardRare,
-      cardTrunfo,
-      isSaveButtonDisabled,
-      hasTrunfo,
-      filterName,
-      filterSelect,
-      storageFilter,
-      filterChecked,
-    } = this.state;
-
     return (
       <section>
         <div id="new-card">
           <Form
+            { ...this.state }
             onInputChange={ this.handleChange }
-            isSaveButtonDisabled={ isSaveButtonDisabled }
             onSaveButtonClick={ this.onSaveButtonClick }
-            hasTrunfo={ hasTrunfo }
-            cardName={ cardName }
-            cardDescription={ cardDescription }
-            cardAttr1={ cardAttr1 }
-            cardAttr2={ cardAttr2 }
-            cardAttr3={ cardAttr3 }
-            cardImage={ cardImage }
-            cardRare={ cardRare }
-            cardTrunfo={ cardTrunfo }
           />
           <Card
+            { ...this.state }
             onInputChange={ this.handleChange }
-            cardName={ cardName }
-            cardDescription={ cardDescription }
-            cardAttr1={ cardAttr1 }
-            cardAttr2={ cardAttr2 }
-            cardAttr3={ cardAttr3 }
-            cardImage={ cardImage }
-            cardRare={ cardRare }
-            cardTrunfo={ cardTrunfo }
-            visualizacao
             deleteCardOnStorage={ this.deleteCardOnStorage }
+            visualizacao
           />
         </div>
         <Filter
-          filterName={ filterName }
-          cardTrunfo={ cardTrunfo }
-          filterSelect={ filterSelect }
+          { ...this.state }
           handleChange={ this.handleChange }
           filterCards={ this.filterCards }
           filterCardSelected={ this.filterCardSelected }
           filterCardSuperTrunfo={ this.filterCardSuperTrunfo }
           handleFilter={ this.handleFilter }
-          storageFilter={ storageFilter }
-          filterChecked={ filterChecked }
         />
       </section>
     );
