@@ -23,8 +23,8 @@ class App extends React.Component {
       filterName: '',
       filterSelect: '',
       filterChecked: false,
-      storage: [],
-      storageFilter: [],
+      storage: [...data],
+      storageFilter: this.makeDeck(data),
     };
     this.handleChange = this.handleChange.bind(this);
     this.btnOn = this.btnOn.bind(this);
