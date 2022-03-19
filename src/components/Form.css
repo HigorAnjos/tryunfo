@@ -1,6 +1,5 @@
 form {
-  flex-direction: column;
-  flex-wrap: wrap;
   display: flex;
+  flex-flow: column wrap;
   width: 70%;
 }
