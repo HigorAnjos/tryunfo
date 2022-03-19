@@ -1,14 +1,15 @@
 import React from 'react';
+import { bool, func, shape, string } from 'prop-types';
 
 class Filter extends React.Component {
   render() {
     const { filterName,
       filterSelect,
       handleChange,
-      cardTrunfo,
-      filterCards,
-      filterCardSelected,
-      filterCardSuperTrunfo,
+      // cardTrunfo,
+      // filterCards,
+      // filterCardSelected,
+      // filterCardSuperTrunfo,
       handleFilter,
       storageFilter,
       filterChecked,
@@ -62,5 +63,18 @@ class Filter extends React.Component {
     );
   }
 }
+
+Filter.propTypes = {
+  handleChange: func.isRequired,
+  filterName: string.isRequired,
+  filterSelect: string.isRequired,
+  handleFilter: func.isRequired,
+  storageFilter: shape([]).isRequired,
+  filterChecked: bool.isRequired,
+  // cardTrunfo: bool.isRequired,
+  // filterCards: func.isRequired,
+  // filterCardSelected: func.isRequired,
+  // filterCardSuperTrunfo: func.isRequired,
+};
 
 export default Filter;

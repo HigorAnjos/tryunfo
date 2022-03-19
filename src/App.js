@@ -82,8 +82,7 @@ class App extends React.Component {
   }
 
   filterCards = (value) => {
-    const { storage, filterName } = this.state;
-    console.log(filterName);
+    const { storage } = this.state;
     const cardList = storage
       .filter((card) => card.cardName.includes(value));
     return this.makeDeck(cardList);

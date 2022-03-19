@@ -39,7 +39,7 @@ class Card extends React.Component {
         <div id="title">
           <h1>Pré-Visualização</h1>
         </div>
-      )
+      );
     } else {
       titleVisualizacao = '';
     }
@@ -101,6 +101,7 @@ Card.propTypes = {
   cardTrunfo: bool.isRequired,
   buttonDelete: bool,
   deleteCardOnStorage: func.isRequired,
+  visualizacao: bool.isRequired,
 };
 
 export default Card;
