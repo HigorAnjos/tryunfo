@@ -1,7 +1,6 @@
 import React from 'react';
 import { string, bool, func } from 'prop-types';
 
-
 class Card extends React.Component {
   render() {
     const {

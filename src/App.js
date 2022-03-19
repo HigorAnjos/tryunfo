@@ -3,7 +3,7 @@ import Form from './components/Form';
 import Card from './components/Card';
 import Filter from './components/Filter';
 import data from './components/data';
-// import './App.css';
+import './App.css';
 
 class App extends React.Component {
   constructor() {
@@ -23,7 +23,7 @@ class App extends React.Component {
       filterName: '',
       filterSelect: '',
       filterChecked: false,
-      storage: [...data],
+      storage: [],
       storageFilter: [],
     };
     this.handleChange = this.handleChange.bind(this);
@@ -78,6 +78,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       hasTrunfo: cardTrunfo,
       storage: [...prevState.storage, newCard],
+      storageFilter: this.makeDeck([...prevState.storage, newCard]),
     }));
   }
 
@@ -137,17 +138,20 @@ class App extends React.Component {
   }
 
   deleteCardOnStorage({ target: { name } }) {
-    let { storage } = this.state;
+    let { storage, storageFilter } = this.state;
     const { cardTrunfo } = storage.find((card) => card.cardName === name);
     storage = storage.filter((card) => card.cardName !== name);
+    storageFilter = this.makeDeck([...storage]);
     if (cardTrunfo) {
       this.setState({
         storage,
         hasTrunfo: false,
+        storageFilter,
       });
     } else {
       this.setState({
         storage,
+        storageFilter,
       });
     }
   }

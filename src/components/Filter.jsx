@@ -14,7 +14,6 @@ class Filter extends React.Component {
       storageFilter,
       filterChecked,
     } = this.props;
-
     return (
       <div className="filter">
         <h2>Todas as Cartas</h2>
